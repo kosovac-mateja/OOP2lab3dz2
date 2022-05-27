@@ -13,6 +13,8 @@ public class Plac extends Panel {
 	private Parcela kliknuta;
 	
 	private ArrayList<Parcela> parcele = new ArrayList<>();
+	
+	private ArrayList<Proizvodjac> proizvodjaci = new ArrayList<>();
 
 	public Plac(int red, int kolona) {
 		this.red = red;
@@ -60,13 +62,19 @@ public class Plac extends Panel {
 		    Parcela parc = it.next();
 		    
 		    if(parc == kliknuta) {
-		    	parcele.remove(i);
-		    	parcele.add(i, proizv);
-		    	this.remove(i);
-		    	this.add(proizv, i);
-		    	revalidate();
-		    	int br = brVodPovr(i);
-		    	((Hidroelektrana)proizv).postaviBrVodPovrs(br);
+		    	if(!(kliknuta instanceof Proizvodjac)) {
+		    		parcele.remove(i);
+			    	parcele.add(i, proizv);
+			    	this.remove(i);
+			    	this.add(proizv, i);
+			    	proizvodjaci.add(proizv);
+			    	revalidate();
+			    	for(Proizvodjac p : proizvodjaci) {
+			    		int ind = parcele.indexOf(p);
+			    		int br = brVodPovr(ind);
+				    	((Hidroelektrana)p).postaviBrVodPovrs(br);
+			    	}
+		    	}
 		    	break;
 		    }
 		    

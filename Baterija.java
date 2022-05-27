@@ -8,15 +8,15 @@ public class Baterija {
 		this.kapacitet = kapacitet;
 	}
 	
-	public void napuni(int kolicina) {
+	public synchronized void napuni(int kolicina) {
 		energija = (energija + kolicina) % kapacitet;
 	}
 	
-	public void isprazni() {
+	public synchronized void isprazni() {
 		energija = 0;
 	}
 	
-	public boolean puna() {
+	public synchronized boolean puna() {
 		return energija == kapacitet;
 	}
 }
