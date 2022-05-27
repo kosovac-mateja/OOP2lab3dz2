@@ -12,9 +12,7 @@ public class EnergetskiSistem extends Frame {
 	private Plac plac;
 	
 	private Baterija baterija;
-	
-	private Hidroelektrana h;
-	
+		
 	private Button dodajDugme = new Button("Dodaj!");
 	
 	private void popuniProzor() {
@@ -38,12 +36,15 @@ public class EnergetskiSistem extends Frame {
 		baterija = new Baterija(kap);
 		
 		setBounds(700, 200, 500, 500);
+		setTitle("Energetski sistem");
 		setResizable(false);
 		
 		popuniProzor();
+		
 		addWindowListener(new WindowAdapter() {
 			public void windowClosing(WindowEvent e) {
 				dispose();
+				plac.zaustaviProizvodjace();
 			}
 		});
 		
@@ -53,6 +54,7 @@ public class EnergetskiSistem extends Frame {
 	
 	public static void main(String[] args) {
 		new EnergetskiSistem(5, 5, 5);
+
 	}
 
 }

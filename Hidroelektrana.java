@@ -4,7 +4,7 @@ import java.awt.Color;
 
 public class Hidroelektrana extends Proizvodjac {
 
-	protected int brVodPovrs = 0;
+	private int brVodPovrs = 0;
 	
 	public Hidroelektrana(Baterija baterija) {
 		super('H', Color.BLUE, 1500, baterija);

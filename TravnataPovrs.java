@@ -1,6 +1,6 @@
 package energSistem;
 
-import java.awt.*;
+import java.awt.Color;
 
 public class TravnataPovrs extends Parcela {
 

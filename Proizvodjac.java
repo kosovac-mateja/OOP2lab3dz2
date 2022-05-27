@@ -6,26 +6,30 @@ import java.util.Random;
 public abstract class Proizvodjac extends Parcela implements Runnable{
 	protected int vreme;
 	
+	protected int ukupnoVreme;
+	
 	protected Baterija baterija;
 	
 	protected Thread nit;
 	
 	public Proizvodjac(char oznaka, Color bojaPozadine, int vreme, Baterija baterija) {
 		super(oznaka, bojaPozadine);
-		pokreni();
 		this.vreme = vreme;
 		this.baterija = baterija;
+		ukupnoVreme = vreme + vremeProizvodnje();
+		
+		pokreni();
 	}
 	
 	public int vremeProizvodnje() {
 		return vreme + new Random().nextInt(300);
 	}
 	
-	public abstract boolean uspesno();
+	protected abstract boolean uspesno();
 	
 	public abstract int kolicinaEnergije();
 	
-	public synchronized void pokreni() {
+	protected synchronized void pokreni() {
 		nit = new Thread(this);
 		
 		nit.start();
@@ -40,10 +44,12 @@ public abstract class Proizvodjac extends Parcela implements Runnable{
 	@Override
 	public void run() {
 		while(!nit.interrupted()) {
+			
 			setForeground(Color.WHITE);
 			revalidate();
+			
 			try {
-				nit.sleep(vreme + vremeProizvodnje());
+				nit.sleep(ukupnoVreme);
 			} catch (InterruptedException e) {}
 			
 			if(uspesno()) {
@@ -51,6 +57,7 @@ public abstract class Proizvodjac extends Parcela implements Runnable{
 				baterija.napuni(kolicinaEnergije());
 				revalidate();
 			}
+			
 			try {
 				nit.sleep(300);
 			} catch (InterruptedException e) {}

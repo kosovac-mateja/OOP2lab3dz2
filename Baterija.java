@@ -1,7 +1,7 @@
 package energSistem;
 
 public class Baterija {
-	int energija, kapacitet;
+	private int energija, kapacitet;
 
 	public Baterija(int kapacitet) {
 		energija = kapacitet;
