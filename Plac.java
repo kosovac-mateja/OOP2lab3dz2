@@ -66,6 +66,11 @@ public class Plac extends Panel {
 	public void dodajProizvodjaca(Proizvodjac proizv) {
 		
 		int i = 0;
+		if(kliknuta == null) {
+			proizv.zavrsi();
+			return;
+		}
+		
 		for (Iterator<Parcela> it = parcele.iterator(); it.hasNext();) {
 		    Parcela parc = it.next();
 		    
@@ -98,6 +103,8 @@ public class Plac extends Panel {
 		    i++;
 		    
 		}
+		
+		kliknuta = null;
 	}
 	
 	public void zaustaviProizvodjace() {

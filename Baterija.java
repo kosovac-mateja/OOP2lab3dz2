@@ -9,7 +9,10 @@ public class Baterija {
 	}
 	
 	public synchronized void napuni(int kolicina) {
-		energija = (energija + kolicina) % kapacitet;
+		energija = energija + kolicina;
+		
+		if(energija > kapacitet)
+			energija = kapacitet;
 	}
 	
 	public synchronized void isprazni() {

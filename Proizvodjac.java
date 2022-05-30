@@ -12,6 +12,8 @@ public abstract class Proizvodjac extends Parcela implements Runnable{
 	
 	protected Thread nit;
 	
+	protected boolean radi = false;
+	
 	public Proizvodjac(char oznaka, Color bojaPozadine, int vreme, Baterija baterija) {
 		super(oznaka, bojaPozadine);
 		this.vreme = vreme;
@@ -33,17 +35,21 @@ public abstract class Proizvodjac extends Parcela implements Runnable{
 		nit = new Thread(this);
 		
 		nit.start();
+		
+		radi = true;
 	}
 
 	public synchronized void zavrsi() {
 		if(nit != null) {
 			nit.interrupt();
+					
+			radi = false;
 		}
 	}
 	
 	@Override
 	public void run() {
-		while(!nit.interrupted()) {
+		while(!nit.interrupted() && radi) {
 			
 			setForeground(Color.WHITE);
 			revalidate();

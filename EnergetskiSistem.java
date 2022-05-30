@@ -34,7 +34,7 @@ public class EnergetskiSistem extends Frame {
 	public EnergetskiSistem(int red, int kol, int kap) {
 		plac = new Plac(red, kol);
 		baterija = new Baterija(kap);
-		
+				
 		setBounds(700, 200, 500, 500);
 		setTitle("Energetski sistem");
 		setResizable(false);
@@ -43,8 +43,8 @@ public class EnergetskiSistem extends Frame {
 		
 		addWindowListener(new WindowAdapter() {
 			public void windowClosing(WindowEvent e) {
-				dispose();
 				plac.zaustaviProizvodjace();
+				dispose();
 			}
 		});
 		
